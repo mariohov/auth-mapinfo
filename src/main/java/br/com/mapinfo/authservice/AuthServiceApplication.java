@@ -1,6 +1,8 @@
 package br.com.mapinfo.authservice;
 
-import br.com.mapinfo.authservice.multitenant.*;
+import br.com.mapinfo.authservice.multitenant.DataSourceBasedMultiTenantConnectionProviderImpl;
+import br.com.mapinfo.authservice.multitenant.MultiTenantConstants;
+import br.com.mapinfo.authservice.multitenant.TenantIdentifierResolver;
 import br.com.mapinfo.authservice.multitenant.web.MultiTenantFilter;
 import org.hibernate.MultiTenancyStrategy;
 import org.hibernate.cfg.Environment;
@@ -17,7 +19,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.persistence.PersistenceContext;
 import javax.servlet.Filter;
@@ -29,13 +30,13 @@ import java.util.Map;
 public class AuthServiceApplication {
 
 	@Autowired
-	DataSourceBasedMultiTenantConnectionProviderImpl dsProvider;
+	private DataSourceBasedMultiTenantConnectionProviderImpl dsProvider;
 
 	@Autowired
-	TenantIdentifierResolver tenantResolver;
+	private TenantIdentifierResolver tenantResolver;
 
 	@Autowired
-	AutowireCapableBeanFactory beanFactory;
+	private AutowireCapableBeanFactory beanFactory;
 
 	@Bean
 	@Primary
@@ -82,7 +83,15 @@ public class AuthServiceApplication {
 		return hibernateJpaVendorAdapter;
 	}
 
-//s
+	@Bean
+	public FilterRegistrationBean myFilter() {
+		FilterRegistrationBean registration = new FilterRegistrationBean();
+		Filter tenantFilter = new MultiTenantFilter();
+		beanFactory.autowireBean(tenantFilter);
+		registration.setFilter(tenantFilter);
+		registration.addUrlPatterns("/*");
+		return registration;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(AuthServiceApplication.class, args);

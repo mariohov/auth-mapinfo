@@ -12,10 +12,7 @@
 </head>
 <body>
 <div class="container">
-    <div>
-        <h1 class="page-header" th:text="${tenantid}">Tenant</h1>
-    </div>
-    <form class="form-signin" th:action="@{|/${tenantid}/login|}" method="post">
+    <form class="form-signin" th:action="@{/login}" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
         <p>Example: user / domain / password</p>
         <p th:if="${param.error}" class="error">Invalid user, password, or domain</p>
@@ -39,7 +36,7 @@
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required autofocus/>
         </p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button><br/>
-        <p><a th:href="@{|/${tenantid}/index|}">Back to home page</a></p>
+        <p><a th:href="@{/index}">Back to home page</a></p>
     </form>
 </div>
 </body>

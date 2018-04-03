@@ -1,6 +1,5 @@
 package br.com.mapinfo.authservice.company;
 
-import br.com.mapinfo.authservice.user.User;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -30,11 +29,4 @@ public class Company implements Serializable {
     @OneToMany(mappedBy = "company")
     private List<Organization> organizations;
 
-    public List<Organization> getOrganizations() {
-        return organizations;
-    }
-
-    public void setOrganizations(List<Organization> organizations) {
-        this.organizations = organizations;
-    }
 }

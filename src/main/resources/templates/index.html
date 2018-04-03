@@ -12,9 +12,6 @@
 </head>
 <body>
 <div class="container">
-    <div>
-        <h1 class="page-header" th:text="${tenantid}">Tenant</h1>
-    </div>
     <div class="logout float-right" th:fragment="logout" sec:authorize="isAuthenticated()">
         <p>Logged in: <span sec:authentication="name"></span> | <span th:text="${organization}">Some Domain</span>
         </p>
@@ -28,7 +25,7 @@
     <h2>Hello Spring Security</h2>
     <p>This is an unsecured page, but you can access the secured pages after authenticating.</p>
     <ul>
-        <li>Go to the <a th:href="@{|/${tenantid}/user/index|}">secured pages</a></li>
+        <li>Go to the <a th:href="@{/user/index}">secured pages</a></li>
     </ul>
 </div>
 </body>

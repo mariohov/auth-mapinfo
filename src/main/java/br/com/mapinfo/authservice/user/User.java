@@ -5,8 +5,6 @@ import br.com.mapinfo.authservice.module.Module;
 import br.com.mapinfo.authservice.module.ModuleRole;
 import br.com.mapinfo.authservice.person.Person;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -119,31 +117,4 @@ public class User implements Serializable, UserDetails {
         return this.enabled;
     }
 
-    public Organization getOrganizationLoggedIn() {
-        return organizationLoggedIn;
-    }
-
-    public void setOrganizationLoggedIn(Organization organizationLoggedIn) {
-        this.organizationLoggedIn = organizationLoggedIn;
-    }
-
-    public Module getModuleLoggedIn() {
-        return moduleLoggedIn;
-    }
-
-    public void setModuleLoggedIn(Module moduleLoggedIn) {
-        this.moduleLoggedIn = moduleLoggedIn;
-    }
-
-    public String toString() {
-        return this.getUsername();
-    }
-
-    public Set<Organization> getOrganizations() {
-        return organizations;
-    }
-
-    public void setOrganizations(Set<Organization> organizations) {
-        this.organizations = organizations;
-    }
 }

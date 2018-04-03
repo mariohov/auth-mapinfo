@@ -12,12 +12,9 @@
 </head>
 <body>
 <div class="container">
-    <div>
-        <h1 class="page-header" th:text="${tenantid}">Tenant</h1>
-    </div>
     <div th:replace="index::logout"></div>
     <h2>This is a secured page!</h2>
-    <p><a th:href="@{|/${tenantid}/index|}">Back to home page</a></p>
+    <p><a th:href="@{/index}">Back to home page</a></p>
 </div>
 </body>
 </html>

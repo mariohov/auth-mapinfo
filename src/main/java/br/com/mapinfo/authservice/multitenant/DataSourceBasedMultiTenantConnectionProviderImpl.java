@@ -37,11 +37,16 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDa
 
     @Override
     protected DataSource selectDataSource(String tenantIdentifier) {
+        TenantDataSource tenantDataSource = context.getBean(TenantDataSource.class);
         if (!init) {
             init = true;
-            TenantDataSource tenantDataSource = context.getBean(TenantDataSource.class);
             map.putAll(tenantDataSource.getAll());
         }
+
+        if (map.get(tenantIdentifier) == null) {
+            map.put(tenantIdentifier, tenantDataSource.getDataSource(tenantIdentifier));
+        }
+
         return map.get(tenantIdentifier);
     }
 

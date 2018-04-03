@@ -3,31 +3,31 @@ package br.com.mapinfo.authservice.security.web;
 import br.com.mapinfo.authservice.company.CompanyService;
 import br.com.mapinfo.authservice.company.Organization;
 import br.com.mapinfo.authservice.user.User;
-import br.com.mapinfo.authservice.util.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
+import static br.com.mapinfo.authservice.multitenant.MultiTenantConstants.DEFAULT_TENANT_ID;
+import static br.com.mapinfo.authservice.multitenant.MultiTenantConstants.TENANT_KEY;
+
 @Controller
-public class LoginController extends BaseController {
+public class LoginController {
 
     @Autowired
     private CompanyService companyService;
 
     @RequestMapping(value = "/")
-    public String root(@PathVariable(name = "tenantid") String tenant, Model model) {
-        model.addAttribute("tenantid", tenant);
-        return "redirect:/"+tenant+"/index";
+    public String root(Model model) {
+        return "redirect:/index";
     }
 
     @RequestMapping(value = "/index")
@@ -47,7 +47,16 @@ public class LoginController extends BaseController {
     }
 
     @RequestMapping(value = "/login")
-    public String login(@PathVariable(name = "tenantid") String tenant, ServletRequest request, Model model) {
+    public String login(ServletRequest request, Model model) {
+
+        String tenant;
+
+        HttpServletRequest req = (HttpServletRequest) request;
+        if (req.getHeader(TENANT_KEY) != null) {
+            tenant = (String)req.getHeader(TENANT_KEY);
+        } else {
+            tenant = DEFAULT_TENANT_ID;
+        }
 
         Authentication auth = SecurityContextHolder.getContext()
                 .getAuthentication();

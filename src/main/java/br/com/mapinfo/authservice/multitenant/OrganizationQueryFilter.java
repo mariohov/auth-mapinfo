@@ -1,4 +1,4 @@
-package br.com.mapinfo.authservice.multitenant.web;
+package br.com.mapinfo.authservice.multitenant;
 
 import br.com.mapinfo.authservice.user.User;
 import org.aspectj.lang.JoinPoint;
@@ -18,9 +18,7 @@ import java.util.Collection;
 
 @Aspect
 @Component
-public class OrganizationFilter {
-
-    Logger log = LoggerFactory.getLogger(OrganizationFilter.class);
+public class OrganizationQueryFilter {
 
     @AfterReturning(pointcut = "execution(* javax.persistence.EntityManagerFactory.createEntityManager(..))", returning = "entityManager")
     public void forceFilter(JoinPoint joinPoint, Object entityManager) {

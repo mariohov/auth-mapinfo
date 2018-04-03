@@ -6,7 +6,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -40,14 +39,6 @@ public class Organization implements Serializable {
             {@JoinColumn(name="user_id")})
     private Set<User> users;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -63,15 +54,4 @@ public class Organization implements Serializable {
         return Objects.hash(super.hashCode(), id);
     }
 
-    public String toString() {
-        return name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

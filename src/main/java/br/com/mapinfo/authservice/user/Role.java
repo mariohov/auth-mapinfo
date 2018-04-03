@@ -42,14 +42,6 @@ public class Role implements Serializable, GrantedAuthority {
         return this.name;
     }
 
-    public Set<Privilege> getPrivileges() {
-        return privileges;
-    }
-
-    public void setPrivileges(Set<Privilege> privileges) {
-        this.privileges = privileges;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
