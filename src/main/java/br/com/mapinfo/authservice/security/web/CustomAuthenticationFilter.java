@@ -1,7 +1,6 @@
 package br.com.mapinfo.authservice.security.web;
 
 import br.com.mapinfo.authservice.security.CustomAuthenticationToken;
-import br.com.mapinfo.authservice.user.User;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;

@@ -5,8 +5,6 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.hibernate.Session;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,8 +34,11 @@ public class OrganizationQueryFilter {
             }
 
             if (!isAdmin && !auth.getClass().equals(AnonymousAuthenticationToken.class)) {
-                Long organizationId = ((User) auth.getPrincipal()).getOrganizationLoggedIn().getId();
-                hibernateSession.enableFilter("organizationFilter").setParameter("organizationId", organizationId);
+                User user = (User) auth.getPrincipal();
+                if (user.getOrganizationLoggedIn() != null) {
+                    Long organizationId = user.getOrganizationLoggedIn().getId();
+                    hibernateSession.enableFilter("organizationFilter").setParameter("organizationId", organizationId);
+                }
             }
         }
     }

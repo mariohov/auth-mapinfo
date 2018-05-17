@@ -20,6 +20,7 @@ public class CustomUserDetailsAuthenticationProvider extends AbstractUserDetails
     private static final String USER_NOT_FOUND_PASSWORD = "userNotFoundPassword";
 
     private PasswordEncoder passwordEncoder;
+
     private CustomUserDetailsService userDetailsService;
 
     /**
@@ -69,8 +70,8 @@ public class CustomUserDetailsAuthenticationProvider extends AbstractUserDetails
         UserDetails loadedUser;
 
         try {
-            loadedUser = this.userDetailsService.loadUserByUsernameAndOrganization(auth.getPrincipal()
-                    .toString(), auth.getOrganization());
+            loadedUser = this.userDetailsService.loadUserByUsername(auth.getPrincipal()
+                    .toString());
 
         } catch (UsernameNotFoundException notFound) {
             if (authentication.getCredentials() != null) {
