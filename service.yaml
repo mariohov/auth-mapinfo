@@ -1,4 +1,3 @@
-# Source: rabbitmq-ha/templates/service-discovery.yaml
 apiVersion: v1
 kind: Service
 metadata:
