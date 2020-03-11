@@ -21,13 +21,12 @@ data:
     ## RabbitMQ configuration
     ## Ref: https://github.com/rabbitmq/rabbitmq-server/blob/master/docs/rabbitmq.conf.example
 
-    ## Authentification
-
     ## Clustering
     cluster_formation.peer_discovery_backend  = rabbit_peer_discovery_k8s
     cluster_formation.k8s.host = kubernetes.default.svc.cluster.local
     cluster_formation.k8s.address_type = hostname
     cluster_formation.node_cleanup.interval = 10
+    
     # Set to false if automatic cleanup of absent nodes is desired.
     # This can be dangerous, see http://www.rabbitmq.com/cluster-formation.html#node-health-checks-and-cleanup.
     cluster_formation.node_cleanup.only_log_warning = true
@@ -41,22 +40,6 @@ data:
 
     ## Memory-based Flow Control threshold
     vm_memory_high_watermark.absolute = 256MB
-
-    ## Auth HTTP Backend Plugin
-
-    ## LDAP Plugin
-
-    ## MQTT Plugin
-
-    ## Web MQTT Plugin
-
-    ## STOMP Plugin
-
-    ## Web STOMP Plugin
-
-    ## Prometheus Plugin
-
-    ## AMQPS support
 ---
 # Source: rabbitmq-ha/templates/secret.yaml
 apiVersion: v1
@@ -68,9 +51,9 @@ metadata:
     app: rabbitmq-ha
 type: Opaque
 data:
-  rabbitmq-username: "YWRtaW4="
-  rabbitmq-password: "c2VjcmV0cGFzc3dvcmQ="
+  rabbitmq-username: "Z3Vlc3Q="
+  rabbitmq-password: "UDF4MzBu"
   rabbitmq-management-username: "bWFuYWdlbWVudA=="
-  rabbitmq-management-password: "YW5vdGhlcnNlY3JldHBhc3N3b3Jk"
+  rabbitmq-management-password: "V21zQzVvMjc3Vw=="
   rabbitmq-erlang-cookie: "c2VjcmV0Y29va2ll"
   definitions.json: "ewogICJnbG9iYWxfcGFyYW1ldGVycyI6IFsKICAgIAogIF0sCiAgInVzZXJzIjogWwogICAgewogICAgICAibmFtZSI6ICJtYW5hZ2VtZW50IiwKICAgICAgInBhc3N3b3JkIjogImFub3RoZXJzZWNyZXRwYXNzd29yZCIsCiAgICAgICJ0YWdzIjogIm1hbmFnZW1lbnQiCiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJhZG1pbiIsCiAgICAgICJwYXNzd29yZCI6ICJzZWNyZXRwYXNzd29yZCIsCiAgICAgICJ0YWdzIjogImFkbWluaXN0cmF0b3IiCiAgICB9CiAgXSwKICAidmhvc3RzIjogWwogICAgewogICAgICAibmFtZSI6ICIvIgogICAgfQogIF0sCiAgInBlcm1pc3Npb25zIjogWwogICAgewogICAgICAidXNlciI6ICJhZG1pbiIsCiAgICAgICJ2aG9zdCI6ICIvIiwKICAgICAgImNvbmZpZ3VyZSI6ICIuKiIsCiAgICAgICJyZWFkIjogIi4qIiwKICAgICAgIndyaXRlIjogIi4qIgogICAgfQogIF0sCiAgInBhcmFtZXRlcnMiOiBbCiAgICAKICBdLAogICJwb2xpY2llcyI6IFsKICAgIAogIF0sCiAgInF1ZXVlcyI6IFsKICAgIAogIF0sCiAgImV4Y2hhbmdlcyI6IFsKICAgIAogIF0sCiAgImJpbmRpbmdzIjogWwogICAgCiAgXQp9"
