@@ -156,15 +156,5 @@ spec:
             items:
             - key: definitions.json
               path: definitions.json
-  volumeClaimTemplates:
-    - metadata:
-        name: data
-        annotations:
-        labels:
-      spec:
-        accessModes:
-          - "ReadWriteOnce"
-        resources:
-          requests:
-            storage: "8Gi"
-        storageClassName: "managed-premium"
+        - name: data
+          emptyDir: {}
