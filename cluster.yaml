@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: rmq-rabbitmq-ha-discovery
-  namespace: default
+  namespace: traceability-prd
   labels:
     app: rabbitmq-ha
 spec:
@@ -31,7 +31,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: rmq-rabbitmq-ha
-  namespace: default
+  namespace: traceability-prd
   labels:
     app: rabbitmq-ha
 spec:
@@ -58,7 +58,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: rmq-rabbitmq-ha
-  namespace: default
+  namespace: traceability-prd
   labels:
     app: rabbitmq-ha
 spec:
@@ -118,7 +118,7 @@ spec:
               mountPath: /var/lib/rabbitmq
       containers:
         - name: rabbitmq-ha
-          image: rabbitmq:3.7.19-alpine
+          image: rabbitmq:3.8.2
           imagePullPolicy: IfNotPresent
           ports:
             - name: epmd
@@ -220,4 +220,4 @@ spec:
         resources:
           requests:
             storage: "8Gi"
-        storageClassName: "portworx-rabbitmq"
+        storageClassName: "managed-premium"
