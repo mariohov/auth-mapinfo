@@ -118,7 +118,7 @@ spec:
               mountPath: /var/lib/rabbitmq
       containers:
         - name: rabbitmq-ha
-          image: rabbitmq:3.8.2
+          image: rabbitmq:3.7.19-alpine
           imagePullPolicy: IfNotPresent
           ports:
             - name: epmd
